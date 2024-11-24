@@ -1,0 +1,25 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main  # 当代码推送到 main 分支时触发
+  pull_request:
+    branches:
+      - main  # 当有 PR 提交到 main 分支时触发
+
+jobs:
+  build:
+    name: Build with Self-Hosted Runner
+    runs-on: self-hosted  # 告诉 GitHub 使用自托管 Runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # 检出代码
+
+      - name: Run a script
+        run: echo "Hello from your self-hosted runner!"
+
+      - name: Docker test
+        run: |
+          docker --version
+          echo "Docker is running!"
